@@ -151,4 +151,76 @@ void main() {
   for (var tarefa in listaTarefas) {
     tarefa.exibirResumo();
   }
+
+// MÓDULO DE RELATÓRIOS E CÁLCULOS (RF07 a RF15)
+
+// RF07: Exibir tarefas com status "concluida"
+
+var tarefasConcluidas = listaTarefas.where((t) => t.status == 'concluida');
+var tarefasPendentes = listaTarefas.where((t) => t.status == 'pendente');
+var tarefasEmAndamento = listaTarefas.where((t) => t.status == 'em andamento');
+var tarefasCanceladas = listaTarefas.where((t) => t.status == 'cancelada');
+
+// RF08: Somar valores das tarefas concluídas
+
+double totalConcluidas = tarefasConcluidas.fold(0.0, (soma, t) => soma + t.valor);
+
+// RF09: calcular média de valor das tarefas pendentes
+
+double mediaPendentes = 0.0;
+if (tarefasPendentes.isNotEmpty) {
+  double somaPendentes =tarefasPendentes.fold(0.0, (soma, t) => soma + t.valor);
+  mediaPendentes = somaPendentes / tarefasPendentes.length;
+}
+
+// RF10: Calcular total de horas por status usando map
+
+Map<String, int> horasPorStatus = {};
+for (var t in listaTarefas) {
+  horasPorStatus[t.status] = (horasPorStatus[t.status] ?? 0) + t.horas;
+}
+
+  // RF11: Indentificar tarefas com dados incompletos (título, responsável ou horas ausentes)
+
+  var tarefasIncompletas = listaTarefas.where((t) => t.titulo == 'Sem título' || t.responsavel == 'Não informado' || t.horas == 0);
+
+  // RF12 Exibir status únicos usando Set
+
+  Set<String> statusUnicos = listaTarefas.map((t) => t.status).toSet();
+
+  // RF15: gerar relatório final
+
+  print('   RELATÓRIO FINAL   ');
+  print('Total de tarefas analisadas: ${listaTarefas.length}');
+  print('Tarefas concluídas: ${tarefasConcluidas.length}');
+  print('Tarefas pendentes: ${tarefasPendentes.length}');
+  print('Tarefas em andamento: ${tarefasEmAndamento.length}');
+  print('Tarefas canceladas: ${tarefasCanceladas.length}');
+  print('Valor total das tarefas concluídas: R\$ ${totalConcluidas.toStringAsFixed(2)}');
+
+  if (tarefasPendentes.isNotEmpty) {
+    print('Valor médio das tarefas pendentes: R\$ ${mediaPendentes.toStringAsFixed(2)}');
+  } else {
+    print('Não há tarefas pendentes para calcular a média de valor.');
+  } 
+
+  print('/nTotal de horas por status:');
+  horasPorStatus.forEach((status, horas) {
+    print('- $status: $horas horas');
+  });
+
+  print('\nStatus encontrados (usando Set):');
+  for (var status in statusUnicos) {
+    print('- $status');
+  }
+
+  print ('\nTarefas com dados incompletos:');
+  for (var t in tarefasIncompletas) {
+    List<String> problemas = [];
+    if (t.titulo == 'Sem Título') problemas.add('Título ausente');
+    if (t.responsavel == 'Não Informado') problemas.add('Responsável ausente'); 
+    if (t.horas == 0) problemas.add('Horas ausentes/invalidas');    
+
+    print('ID ${t.id}: ${problemas.join(" ou ")}');
+  }
 }
