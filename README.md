@@ -31,6 +31,13 @@ Este projeto foi desenvolvido com o propósito de consolidar e demonstrar os pri
 
 ---
 
+## 🔗 Links Importantes do Projeto
+* **Repositório Público no GitHub:** https://github.com/Jntps/TaskReport-Dart-Simulador-de-Tratamento-de-Dados-de-Tarefas-Mobile-
+* **Quadro Kanban de Organização:** https://trello.com/invite/b/6a14d240f2c7e5eaec0833a1/ATTI17e2c1b0f10826a75275798b5d7204b378DD3B6D/taskreport-dart
+* **Vídeo de Apresentação e Demonstração:** https://www.loom.com/share/00e3222981b54de4a27ef33f30197d9d
+
+---
+
 ## 📂 Estrutura de Pastas do Projeto
 A organização do repositório segue estritamente as boas práticas e os requisitos mínimos exigidos:
 
