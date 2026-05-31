@@ -16,7 +16,7 @@ class Tarefa extends ItemTrabalho {
   String responsavel;
   String status;
   String prioridade;
-
+      
   // Encapsulamento: atributo privado
   double _valor;
   int horas;
